@@ -28,9 +28,9 @@
             message: "failed login"
         }
 
-# Activity
+# Data
 
-## POST /activity
+## POST /data
 
 ### request
     headers: x-access-token
@@ -65,7 +65,7 @@
         }
 
 
-## GET /activity
+## GET /data
 
 ### request
 
@@ -95,7 +95,7 @@
             message: "failed"
         }
 
-## GET /activity/:_id
+## GET /data/:_id
 
 ### request
     

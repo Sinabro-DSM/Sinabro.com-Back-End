@@ -1,6 +1,6 @@
 # Admin Login
 
-## Base 10.156.147.200:3000
+## Base 10.156.147.200:8000
 
 ## POST /admin
 
@@ -30,6 +30,33 @@
 
 # Data
 
+## GET /data/file
+
+### request
+    header: x-access-token
+
+### response
+
+- success
+
+        200
+        {
+            message: "success",
+            post
+        }
+
+- failed
+
+        403
+        {
+            message: "Not logged in"
+        }
+
+        500
+        {
+            message: "failed"
+        }
+
 ## POST /data
 
 ### request
@@ -38,7 +65,7 @@
     {
         title: String,
         content: String,
-        post: String,
+        file: String,
         category: String
     }
 

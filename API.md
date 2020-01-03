@@ -30,33 +30,6 @@
 
 # Data
 
-## GET /data/file
-
-### request
-    header: x-access-token
-
-### response
-
-- success
-
-        200
-        {
-            message: "success",
-            post
-        }
-
-- failed
-
-        403
-        {
-            message: "Not logged in"
-        }
-
-        500
-        {
-            message: "failed"
-        }
-
 ## POST /data
 
 ### request
@@ -76,7 +49,6 @@
         200
         {
             message: "success",
-            post
         }
 
 - failed
@@ -92,7 +64,7 @@
         }
 
 
-## GET /data
+## GET /data/:category
 
 ### request
 
@@ -107,7 +79,13 @@
         200
         {
             message: "success",
-            post
+            post: [
+                {
+                    title: String,
+                    content: String,
+                    date: Date
+                }
+            ]
         }
 
 - failed

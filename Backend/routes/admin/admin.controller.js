@@ -15,7 +15,7 @@ const login = (req, res, next) => {
         });
         res.status(200).json({
             message: 'successful login',
-            token
+            access_token: token
         })
     } else {
         res.status(403).json({

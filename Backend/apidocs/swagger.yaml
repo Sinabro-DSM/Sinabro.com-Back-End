@@ -1,0 +1,202 @@
+swagger: "2.0"
+info:
+  description: Sinabro.com
+  version: "1.0.0"
+  title: Sinabro.com
+host: "loaclhost:8000"
+basePath: "/"
+tags:
+  - name: "admin"
+    description: "Admin API"
+  - name: "data"
+    description: "Data API"
+schemes:
+- "http"
+paths:
+  /admin:
+    post:
+      produces:
+        - "application/json"
+      tags:
+        - "admin"
+      summary: "로그인"
+      description: "로그인"
+      parameters:
+        - name: "login"
+          in: "body"
+          description: "Admin login"
+          schema: 
+            type: "string"
+            properties: 
+              id: 
+                type: "string"
+                example: "AdminId"
+              password:
+                type: "string"
+                example: "AdminPassword"
+      responses:
+        200:
+          description: "로그인 성공"
+          schema: 
+            type: "object"
+            properties:
+              access_token:
+                type: "string"
+                example: "access_token"
+        403:
+          description: "로그인 실패"
+  /data/{category}:
+    get:
+      produces: 
+      - "application/json"
+      tags:
+      - "data"
+      summary: "전체 게시글 보기"
+      description: "전체 게시글 보기"
+      parameters:
+      - name: "category"
+        in: "path"
+        type: "string"
+        description: "카테고리"
+        required: true
+      responses:
+        200:
+          description: "성공"
+          schema:
+            type: "object"
+            properties:
+              message: 
+                type: "string"
+                example: "success"
+              post: 
+                type: "array"
+                items: 
+                  type: "object"
+                  properties:
+                    _id:
+                      type: "string"
+                      example: "_id"
+                    title:
+                      type: "string"
+                      example: "title"
+                    content: 
+                      type: "string"
+                      example: "content"
+                    file:
+                      type: "string"
+                      example: "file"
+                    category:
+                      type: "string"
+                      example: "category"
+                    date: 
+                      type: "string"
+                      example: "date"
+        500:
+          description: "실패"
+  /data:
+    post:
+      produce:
+      - "application/json"
+      tags:
+      - "data"
+      summary: "글 쓰기"
+      description: "글 쓰기"
+      parameters:
+        - name: "title"
+          in: "formData"
+          type: "string"
+          description: "제목"
+        - name: "content"
+          in: "formData"
+          type: "string"
+          description: "내용"
+        - name: "file"
+          in: "formData"
+          type: "file"
+          description: "파일"
+        - name: "category"
+          in: "formData"
+          type: "string"
+          description: "카테고리"
+          required: true
+        - name: "access_token"
+          in: "header"
+          type: "string"
+          description: "액세스 토큰"
+      responses:
+        200:
+          description: "성공"
+          schema: 
+            type: "object"
+            properties:
+              message:
+                type: "string"
+                example: "글 작성 성공"
+              post:
+                type: "object"
+                properties:
+                  title:
+                    type: "string"
+                    example: "title"
+                  content:
+                    type: "string"
+                    example: "content"
+                  file:
+                    type: "string"
+                    example: "file"
+                  category:
+                    type: "string"
+                    example: "category"
+                  date: 
+                    type: "string"
+                    example: "date"
+        403:
+          description: "로그인이 되어있지 않음"
+        500:
+          description: "작성 실패"
+  /data/showone/{_id}:
+    get:
+      produces:
+        "application/json"
+      tags:
+        - "data"
+      summary: "게시글 보기"
+      description: "게시글 보기"
+      parameters:
+      - name: "_id"
+        in: "path"
+        type: "string"
+        description: "게시글 아이디"
+        required: true
+      responses:
+        200:
+          description: "성공"
+          schema:
+            type: "object"
+            properties:
+              message: 
+                type: "string"
+                example: "success"
+              post: 
+                type: "object"
+                properties:
+                  _id:
+                    type: "string"
+                    example: "_id"
+                  title:
+                    type: "string"
+                    example: "title"
+                  content: 
+                    type: "string"
+                    example: "content"
+                  file:
+                    type: "string"
+                    example: "file"
+                  category:
+                    type: "string"
+                    example: "category"
+                  date: 
+                    type: "string"
+                    example: "date"
+        500:
+          description: "실패"
